@@ -1,5 +1,5 @@
 language = "nodejs"
-run = "npm run build && npm start"
+run = "npm install && npm run start"
 
 [env]
 IMGBB_API_KEY = "9c4c485b1b1a33b4fff5eabe1cfc64e0"

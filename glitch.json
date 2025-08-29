@@ -1,6 +1,6 @@
 {
   "install": "npm install",
-  "start": "npm run build && npm run dev:api",
+  "start": "npm run start",
   "watch": {
     "ignore": [
       "\\.git",
