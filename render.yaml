@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: convi-crawler-api
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: node dist/api-server.js
+    envVars:
+      - key: IMGBB_API_KEY
+        value: 9c4c485b1b1a33b4fff5eabe1cfc64e0
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
