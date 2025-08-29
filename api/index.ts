@@ -1,7 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import express from 'express';
 import cors from 'cors';
-import { ConviCrawler } from '../dist/crawler';
+import { ConviCrawler } from '../src/crawler';
+import { ImgBBService } from '../src/imgbb-service';
 
 // Create Express app
 const app = express();
