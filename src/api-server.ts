@@ -24,6 +24,31 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Simple test endpoint for browser testing
+app.get('/api/test', (req, res) => {
+  res.json({
+    message: '🎉 API is working!',
+    endpoints: {
+      health: 'GET /health',
+      crawl: 'POST /api/crawl',
+      batch: 'POST /api/crawl-batch'
+    },
+    example: {
+      method: 'POST',
+      url: '/api/crawl',
+      body: {
+        websiteUrl: 'https://bearshop-product.myshopify.com',
+        options: {
+          buttonSelector: '.storechat-button',
+          zoomSelector: '.storechat-widget',
+          zoomLevel: 0.9,
+          customCSS: '#storechat-container .storechat-header{background-color: #FF0000 !important;}'
+        }
+      }
+    }
+  });
+});
+
 // Main crawler endpoint for n8n integration
 app.post('/api/crawl', async (req, res) => {
   try {
