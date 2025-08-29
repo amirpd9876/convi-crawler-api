@@ -7,9 +7,10 @@
     "dev:api": "node dist/src/api-server.js",
     "start:api": "node dist/src/api-server.js",
     "build": "tsc",
-    "postinstall": "npx playwright install chromium",
+    "postinstall": "npx playwright install --with-deps chromium",
     "vercel-build": "npm run build",
-    "start": "npm run build && npx playwright install chromium && node dist/src/api-server.js"
+    "start": "npm run build && node dist/src/api-server.js",
+    "replit-start": "npm run build && npx playwright install --with-deps chromium && node dist/src/api-server.js"
   },
   "dependencies": {
     "axios": "^1.6.2",

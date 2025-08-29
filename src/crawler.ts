@@ -20,15 +20,30 @@ export class ConviCrawler {
     try {
       console.log('🚀 Initializing Playwright browser...');
       
-      this.browser = await chromium.launch({
+      // Special configuration for cloud environments
+      const launchOptions: any = {
         headless: this.config.headless ?? true,
         args: [
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
-          '--disable-gpu'
+          '--disable-gpu',
+          '--no-first-run',
+          '--no-zygote',
+          '--disable-extensions',
+          '--disable-background-timer-throttling',
+          '--disable-backgrounding-occluded-windows',
+          '--disable-renderer-backgrounding'
         ]
-      });
+      };
+
+      // For Replit/cloud environments
+      if (process.env.REPL_ID || process.env.REPLIT_DB_URL) {
+        console.log('🌐 Detected Replit environment, adjusting browser settings...');
+        launchOptions.args.push('--single-process');
+      }
+
+      this.browser = await chromium.launch(launchOptions);
 
       this.page = await this.browser.newPage();
       await this.page.setViewportSize({
