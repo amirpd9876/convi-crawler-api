@@ -7,9 +7,9 @@
     "dev:api": "node dist/src/api-server.js",
     "start:api": "node dist/src/api-server.js",
     "build": "tsc",
-    "postinstall": "",
+    "postinstall": "echo 'Dependencies installed'",
     "vercel-build": "npm run build",
-    "start": "npm run build && bash start-server.sh",
+    "start": "npm run build && node dist/src/api-server.js",
     "replit-start": "npm run build && node dist/src/api-server.js"
   },
   "dependencies": {
