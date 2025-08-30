@@ -35,9 +35,24 @@ export class ConviCrawler {
         ]
       };
 
-      // For Replit environment
+      // For Replit environment - use system Chromium
       if (process.env.REPL_ID || process.env.REPLIT_DB_URL) {
-        console.log('🌐 Detected Replit environment, using Puppeteer...');
+        console.log('🌐 Detected Replit environment, using system Chromium...');
+        // Try to find Chromium in common Replit/Nix locations
+        const possiblePaths = [
+          '/usr/bin/chromium',
+          '/usr/bin/chromium-browser',
+          process.env.PUPPETEER_EXECUTABLE_PATH,
+          '/nix/store/x205pbkd5xh5g4iv0g58xjla55has3cx-chromium-108.0.5359.94/bin/chromium-browser'
+        ];
+        
+        for (const path of possiblePaths) {
+          if (path && require('fs').existsSync(path)) {
+            console.log(`✅ Found Chromium at: ${path}`);
+            launchOptions.executablePath = path;
+            break;
+          }
+        }
       }
 
       this.browser = await puppeteer.launch(launchOptions);
