@@ -7,10 +7,10 @@
     "dev:api": "node dist/src/api-server.js",
     "start:api": "node dist/src/api-server.js",
     "build": "tsc",
-    "postinstall": "npx playwright install --with-deps chromium",
+    "postinstall": "",
     "vercel-build": "npm run build",
     "start": "npm run build && bash start-server.sh",
-    "replit-start": "npm run build && npx playwright install chromium && node dist/src/api-server.js"
+    "replit-start": "npm run build && node dist/src/api-server.js"
   },
   "dependencies": {
     "axios": "^1.6.2",
@@ -18,8 +18,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
-    "playwright": "^1.40.1",
-    "playwright-core": "^1.40.1"
+    "puppeteer": "^21.6.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

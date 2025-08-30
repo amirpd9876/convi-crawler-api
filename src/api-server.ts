@@ -2,7 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { ConviCrawler } from './crawler';
+// Use Puppeteer for Replit compatibility
+import { ConviCrawler } from './crawler-puppeteer';
 import { CrawlerConfig } from './types';
 
 // Load environment variables
@@ -113,7 +114,7 @@ app.post('/api/crawl', async (req, res) => {
     
     // Modified run method that doesn't use n8n webhook
     await crawler.initialize();
-    await crawler.navigateToWebsite();
+    await crawler.navigateToWebsite(websiteUrl);
     await crawler.clickTargetButton();
 
     // Remove modals/popups if requested
@@ -133,7 +134,7 @@ app.post('/api/crawl', async (req, res) => {
 
     // Apply CSS and take after screenshot  
     console.log('🎨 Applying custom CSS...');
-    await crawler.injectCustomCSS();
+    await crawler.injectCustomCSS(config.customCSS || '');
 
     console.log('📸 Taking AFTER screenshot...');
     const afterBuffer = await crawler.takeScreenshot('after-screenshot');

@@ -18,7 +18,8 @@
   },
   "include": [
     "src/**/*",
-    "api/**/*"
+    "api/**/*",
+    "puppeteer-types.d.ts"
   ],
   "exclude": [
     "node_modules",

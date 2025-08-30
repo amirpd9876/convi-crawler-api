@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import express from 'express';
 import cors from 'cors';
-import { ConviCrawler } from '../src/crawler';
+import { ConviCrawler } from '../src/crawler-puppeteer';
 import { ImgBBService } from '../src/imgbb-service';
 
 // Create Express app
@@ -79,7 +79,7 @@ app.post('/api/crawl', async (req, res) => {
         
         // Initialize and run crawler
         await crawler.initialize();
-        await crawler.navigateToWebsite();
+        await crawler.navigateToWebsite(websiteUrl);
         await crawler.clickTargetButton();
         
         // Remove modals/popups if requested
@@ -95,7 +95,7 @@ app.post('/api/crawl', async (req, res) => {
         
         // Apply CSS and take after screenshot  
         console.log('🎨 Applying custom CSS...');
-        await crawler.injectCustomCSS();
+        await crawler.injectCustomCSS(config.customCSS || '');
         
         console.log('📸 Taking AFTER screenshot...');
         const afterBuffer = await crawler.takeScreenshot('after-screenshot');
